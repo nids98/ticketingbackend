@@ -13,7 +13,7 @@ class TasksController extends Controller
 
         $task->tags = $request->input("tags");
         $task->desc = $request->input("desc");
-        $task->status = $request->input("status");
+        $task->status = "pending";
 
         // Save task
         $task->save();
