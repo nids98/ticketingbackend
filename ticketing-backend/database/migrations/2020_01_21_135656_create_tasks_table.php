@@ -18,6 +18,7 @@ class CreateTasksTable extends Migration
             $table->UnsignedBigInteger('cat_id');
             $table->longText('desc');
             $table->string('status');
+            $table->timestamps();
 
             $table->foreign('cat_id')->references('cat_id')
                 ->on('cat_id_tocat_names')->onDelete('cascade');

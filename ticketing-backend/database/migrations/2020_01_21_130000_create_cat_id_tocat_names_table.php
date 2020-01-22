@@ -16,6 +16,7 @@ class CreateCatIdTocatNamesTable extends Migration
         Schema::create('cat_id_tocat_names', function (Blueprint $table) {
             $table->bigIncrements('cat_id');
             $table->string('cat_name');
+            $table->timestamps();
         });
     }
 

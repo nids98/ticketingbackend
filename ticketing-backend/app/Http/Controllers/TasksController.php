@@ -11,27 +11,30 @@ use Illuminate\Support\Facades\DB;
 
 class TasksController extends Controller
 {
-    /*public function getList(Request $request,$tech_id,$task_idd) {
 
-        $info = DB::table('tasks')->select('desc', 'status')
-            ->where('task_id', '=', $task_idd)
+    public function updateStatus(Request $request,$task_idd) {
+
+        DB::table('tasks')
+            ->where ('task_id',$task_idd)
+            ->update(['status' => 'completed']);
+
+        DB::table('tech_id_totask_ids')
+            ->where ('task_id',$task_idd)
+            ->update(['status' => 'completed']);
+
+        return "Success";
+    }
+
+
+    public function getList(Request $request,$tech_idd) {
+
+        $array = DB::table('tech_id_totask_ids')->select('task_id', 'status')
+            ->where('tech_id', '=', $tech_idd)
             ->get();
 
-        $cat_idd = DB::table('tasks')->select('cat_id')
-            ->where('task_id', '=', $task_idd)
-            ->get();
 
-        $cat_name_obj= DB::table('cat_id_tocat_names')->select('cat_name')
-            ->where('cat_id', '=', strval($cat_idd[0]->cat_id) )
-            ->get();
-
-        $cat_name= strval($cat_name_obj[0]->cat_name);
-
-        $json = json_decode( $info );
-        $json[0]->cat_name= $cat_name;
-
-        return response()->json($json);
-    }*/
+        return response()->json($array);
+    }
 
 
     public function getTaskDesc(Request $request,$tech_id,$task_idd) {

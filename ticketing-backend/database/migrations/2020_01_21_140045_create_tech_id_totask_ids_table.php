@@ -17,6 +17,7 @@ class CreateTechIdTotaskIdsTable extends Migration
             $table->bigIncrements('task_id');
             $table->UnsignedBigInteger('tech_id');
             $table->string('status');
+            $table->timestamps();
 
             $table->foreign('tech_id')->references('tech_id')
                 ->on('technicians')->onDelete('cascade');
