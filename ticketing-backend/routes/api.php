@@ -16,6 +16,12 @@ use Illuminate\Http\Request;
 // Create Task Route
 Route::post('/task/submit', 'TasksController@createTask');
 
+Route::get('/task/{tech_id}/{task_idd}', 'TasksController@getTaskDesc');
+
+Route::get('/task/{tech_idd}', 'TasksController@getList');
+
+Route::put('/task/{task_idd}', 'TasksController@updateStatus');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

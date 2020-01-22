@@ -15,12 +15,14 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('task_id');
-            $table->string('category_name');
-            $table->mediumText('desc');
+            $table->UnsignedBigInteger('cat_id');
+            $table->longText('desc');
             $table->string('status');
             $table->timestamps();
+
+            $table->foreign('cat_id')->references('cat_id')
+                ->on('cat_id_tocat_names')->onDelete('cascade');
         });
- 
     }
 
     /**
