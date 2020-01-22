@@ -11,6 +11,30 @@ use Illuminate\Support\Facades\DB;
 
 class TasksController extends Controller
 {
+
+    public function getList(Request $request,$tech_id,$task_idd) {
+
+        $info = DB::table('tasks')->select('desc', 'status')
+            ->where('task_id', '=', $task_idd)
+            ->get();
+
+        $cat_idd = DB::table('tasks')->select('cat_id')
+            ->where('task_id', '=', $task_idd)
+            ->get();
+
+        $cat_name_obj= DB::table('cat_id_tocat_names')->select('cat_name')
+            ->where('cat_id', '=', strval($cat_idd[0]->cat_id) )
+            ->get();
+
+        $cat_name= strval($cat_name_obj[0]->cat_name);
+
+        $json = json_decode( $info );
+        $json[0]->cat_name= $cat_name;
+
+        return response()->json($json);
+    }
+
+
     public function createTask(Request $request) {
         // Create a new task
         $task = new Tasks();
@@ -25,7 +49,7 @@ class TasksController extends Controller
         //Get category_id from category
         $category_id = Categories::where('category_name', 'LIKE', '%'.$request->input("category_name").'%')->get();
         $category_id = $category_id[0]->category_id;
-        
+
         //Get all employees of this category_id
         $all_eid = Employees::where('category_id', $category_id)->get();
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTasksTable extends Migration
+class CreateCatIdTocatNamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->bigIncrements('task_id');
-            $table->string('category_name');
-            $table->mediumText('desc');
-            $table->string('status');
-            $table->timestamps();
+        Schema::create('cat_id_tocat_names', function (Blueprint $table) {
+            $table->bigIncrements('cat_id');
+            $table->string('cat_name');
         });
- 
     }
 
     /**
@@ -30,6 +26,6 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('cat_id_tocat_names');
     }
 }
